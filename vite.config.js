@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://trustapi-ten.vercel.app',
+        target: 'https://trustapi.onrender.com',
         secure: false,
       },
     },
