@@ -2,10 +2,19 @@
 import CallToAction from '../components/CallToAction';
 import { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
-
+import axios from 'axios';
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
+const apiUrl = 'https://trustapi-ten.vercel.app';  // L'URL de ton backend
+
+axios.get(`${apiUrl}/api/some-endpoint`)
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch('/api/post/getPosts');
