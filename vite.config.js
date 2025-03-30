@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://trust-group.agency',
+        target: 'https://trustapi-ten.vercel.app',
         secure: false,
       },
     },
