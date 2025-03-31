@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc';
 export default defineConfig({
   server: {
     proxy: {
-      '${API_URL}/api': {
+      '${API_URL}': {
         target: 'https://trustapi.onrender.com',
         secure: false,
       },
