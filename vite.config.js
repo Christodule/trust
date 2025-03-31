@@ -11,6 +11,6 @@ export default defineConfig({
       },
     },
   },
-  base:'.${API_URL}/api/',
+  base:'/',
   plugins: [react()],
 });
