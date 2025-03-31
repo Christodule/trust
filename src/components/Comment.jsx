@@ -4,17 +4,18 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Button, Textarea } from 'flowbite-react';
 
+
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
   const { currentUser } = useSelector((state) => state.user);
-
+  const API_URL = import.meta.env.VITE_API_URL;
   // Récupérer les informations utilisateur lorsque le composant est monté
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`/api/user/${comment.id}`);
+        const res = await fetch(`${API_URL}/api/user/${comment.id}`);
         if (res.ok) {
           const data = await res.json();
           setUser(data);  // Mettre à jour l'utilisateur avec les données récupérées
@@ -38,7 +39,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
       return;
     }
     try {
-      const res = await fetch(`/api/comment/editComment/${comment.id}`, {
+      const res = await fetch(`${API_URL}/api/comment/editComment/${comment.id}`, {
         method: 'PUT',
         headers: {
           "Content-Type": "application/json",

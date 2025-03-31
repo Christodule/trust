@@ -70,6 +70,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const categories = [
     { name: 'Tous', key: 'all' },
@@ -85,7 +86,7 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await fetch('/api/post/getPosts');
+        const res = await fetch(`${API_URL}/api/post/getPosts`)
         if (!res.ok) {
           throw new Error('Erreur lors du chargement des posts');
         }

@@ -15,12 +15,12 @@ export default function CommentSection({ postId }) {
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
   const navigate = useNavigate();
-
+  const API_URL = import.meta.env.VITE_API_URL; 
   useEffect(() => {
     const fetchComments = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+        const res = await fetch(`${API_URL}/api/comment/getPostComments/${postId}`);
         if (!res.ok) throw new Error("Échec du chargement des commentaires");
     
         const data = await res.json();
@@ -51,7 +51,7 @@ export default function CommentSection({ postId }) {
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/comment/create", {
+      const res = await fetch(`${API_URL}/api/comment/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

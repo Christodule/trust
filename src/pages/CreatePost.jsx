@@ -221,6 +221,7 @@ export default function CreatePost() {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
+  const API_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({ 
     title: '', 
     category: '', 
@@ -280,7 +281,7 @@ export default function CreatePost() {
     try {
       const token = localStorage.getItem("token");
   
-      const res = await fetch("/api/post/create", {
+      const res = await fetch(`${API_URL}/api/post/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

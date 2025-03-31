@@ -55,7 +55,7 @@ export default function TrustEvent() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await axios.get("/api/post/getposts", { params: { category: "TrustEvent", limit: 10 } });
+        const res = await axios.get(`${API_URL}/api/post/getPosts`, { params: { category: "TrustEvent", limit: 10 } });
         setEvents(res.data.posts);
       } catch (error) {
         console.error("Error fetching events:", error);
