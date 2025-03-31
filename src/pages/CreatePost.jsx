@@ -274,7 +274,7 @@ export default function CreatePost() {
     setPublishError(null);
   
     // Check if token exists
-    const token = localStorage.getItem("token");
+    const token = localStorage.setItem("token");
     if (!token) {
       setPublishError("Authentication failed. Please log in again.");
       return;
