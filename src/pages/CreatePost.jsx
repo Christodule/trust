@@ -273,14 +273,19 @@ export default function CreatePost() {
     e.preventDefault();
     setPublishError(null);
   
-    // Vérifie et assigne une valeur par défaut à subCategory
+    // Check if token exists
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setPublishError("Authentication failed. Please log in again.");
+      return;
+    }
+  
+    // Ensure subCategory has a default value if not selected
     if (!formData.subCategory) {
-      setFormData((prevData) => ({ ...prevData, subCategory: 'general' })); 
+      setFormData((prevData) => ({ ...prevData, subCategory: "general" }));
     }
   
     try {
-      const token = localStorage.getItem("token");
-  
       const res = await fetch(`${API_URL}/api/post/create`, {
         method: "POST",
         headers: {
@@ -292,15 +297,16 @@ export default function CreatePost() {
   
       const data = await res.json();
       if (!res.ok) {
-        setPublishError(data.message);
+        setPublishError(data.message || "Failed to publish the post.");
         return;
       }
   
       navigate(`/post/${data.slug}`);
     } catch (error) {
-      setPublishError("Something went wrong");
+      setPublishError("Something went wrong. Please try again.");
     }
   };
+  
   
   
   return (
