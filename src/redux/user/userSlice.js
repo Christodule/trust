@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  currentUser: null,
+  currentUser: JSON.parse(localStorage.getItem('user')) || null,
   error: null,
   loading: false,
 };
+
 
 const userSlice = createSlice({
   name: 'user',
@@ -14,11 +15,7 @@ const userSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    signInSuccess: (state, action) => {
-      state.currentUser = action.payload;
-      state.loading = false;
-      state.error = null;
-    },
+    
     signInFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -31,7 +28,9 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
       state.loading = false;
       state.error = null;
+      localStorage.setItem('currentUser', JSON.stringify(action.payload)); // Sauvegarde localement
     },
+    
     updateFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -53,12 +52,25 @@ const userSlice = createSlice({
       state.currentUser = null;
       state.error = null;
       state.loading = false;
+      localStorage.removeItem('user');
+      localStorage.setItem('token', action.payload.token);
     },
+    
+    signInSuccess: (state, action) => {
+      state.currentUser = action.payload;
+      state.loading = false;
+      state.error = null;
+      localStorage.setItem('user', JSON.stringify(action.payload));
+      localStorage.setItem('token', action.payload.token);},
+    
     setUser: (state, action) => {
       state.currentUser = action.payload;
       state.loading = false;
       state.error = null;
+      localStorage.setItem('user', JSON.stringify(action.payload));
+  localStorage.setItem('token', action.payload.token);
     },
+    
   },
 });
 
