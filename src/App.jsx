@@ -1,0 +1,50 @@
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from './components/Layout';
+import { AdminRoute } from './components/AdminRoute';
+import { Overview } from './pages/Overview';
+import { Posts } from './pages/Posts';
+import { PostEditor } from './pages/PostEditor';
+import { Pages } from './pages/Pages';
+import { PageEditor } from './pages/PageEditor';
+import { Events } from './pages/Events';
+import { EventEditor } from './pages/EventEditor';
+import { MediaLibrary } from './pages/MediaLibrary';
+import { Comments } from './pages/Comments';
+import { Rubrics } from './pages/Rubrics';
+import { Users } from './pages/Users';
+import { Settings } from './pages/Settings';
+import { Login } from './pages/Login';
+import { NotFound } from './pages/NotFound';
+
+export const App = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/"
+        element={
+          <AdminRoute>
+            <Layout />
+          </AdminRoute>
+        }
+      >
+        <Route index element={<Overview />} />
+        <Route path="posts" element={<Posts />} />
+        <Route path="posts/new" element={<PostEditor />} />
+        <Route path="posts/:id/edit" element={<PostEditor />} />
+        <Route path="pages" element={<Pages />} />
+        <Route path="pages/new" element={<PageEditor />} />
+        <Route path="pages/:id/edit" element={<PageEditor />} />
+        <Route path="events" element={<Events />} />
+        <Route path="events/new" element={<EventEditor />} />
+        <Route path="events/:id/edit" element={<EventEditor />} />
+        <Route path="media" element={<MediaLibrary />} />
+        <Route path="comments" element={<Comments />} />
+        <Route path="rubrics" element={<Rubrics />} />
+        <Route path="users" element={<Users />} />
+        <Route path="settings" element={<Settings />} />
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+};
